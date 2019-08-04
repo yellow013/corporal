@@ -2,7 +2,6 @@ package io.ffreedom.corporal;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.ButtonGroup;
@@ -13,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 public class Launch {
 	public static void main(String[] args) {
@@ -31,46 +29,35 @@ class TabbedPaneFrame extends JFrame {
 	private static final long serialVersionUID = -888670680904631824L;
 
 	public TabbedPaneFrame() {
-		setTitle("TabbedPaneTest");
+		setTitle("RedStone策略管理系统");
 		setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		tabbedPane = new JTabbedPane();
 
 		ImageIcon icon = new ImageIcon("./chapter6/TabbedPaneTest/yellow-ball.gif");
-		tabbedPane.addTab("Mercury", icon, null);
-		tabbedPane.addTab("Venus", icon, null);
-		tabbedPane.addTab("Earth", icon, null);
-		tabbedPane.addTab("Mars", icon, null);
-		tabbedPane.addTab("Jupiter", icon, null);
-		tabbedPane.addTab("Saturn", icon, null);
-		tabbedPane.addTab("Uranus", icon, null);
-		tabbedPane.addTab("Neptune", icon, null);
-		tabbedPane.addTab("Pluto", icon, null);
+		tabbedPane.addTab("策略", icon, null);
+		tabbedPane.addTab("订单", icon, null);
+		tabbedPane.addTab("持仓", icon, null);
+
 		add(tabbedPane, "Center");
-		tabbedPane.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent event) {
-				if (tabbedPane.getSelectedComponent() == null) {
-					int n = tabbedPane.getSelectedIndex();
-					loadTab(n);
-				}
+		tabbedPane.addChangeListener((ChangeEvent event) -> {
+			if (tabbedPane.getSelectedComponent() == null) {
+				int n = tabbedPane.getSelectedIndex();
+				loadTab(n);
 			}
 		});
 		loadTab(0);
 		JPanel buttonPanel = new JPanel();
 		ButtonGroup buttonGroup = new ButtonGroup();
 		JRadioButton wrapButton = new JRadioButton("Wrap tabs");
-		wrapButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				tabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
-			}
+		wrapButton.addActionListener((ActionEvent event) -> {
+			tabbedPane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
 		});
 		buttonPanel.add(wrapButton);
 		buttonGroup.add(wrapButton);
 		wrapButton.setSelected(true);
 		JRadioButton scrollButton = new JRadioButton("Scroll tabs");
-		scrollButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-			}
+		scrollButton.addActionListener((ActionEvent event) -> {
+			tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		});
 		buttonPanel.add(scrollButton);
 		buttonGroup.add(scrollButton);
@@ -85,6 +72,6 @@ class TabbedPaneFrame extends JFrame {
 	}
 
 	private JTabbedPane tabbedPane;
-	private static final int DEFAULT_WIDTH = 400;
-	private static final int DEFAULT_HEIGHT = 300;
+	private static final int DEFAULT_WIDTH = 640;
+	private static final int DEFAULT_HEIGHT = 480;
 }
