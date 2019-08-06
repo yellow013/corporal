@@ -12,12 +12,18 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class Launch {
+	private static JTable table;
 	public static void main(String[] args) {
 		System.out.println(new File(".").getAbsolutePath());
 		JFrame frame = new TabbedPaneFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		table = new JTable();
+		frame.getContentPane().add(table, BorderLayout.WEST);
 		frame.setVisible(true);
 	}
 }
