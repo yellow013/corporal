@@ -50,6 +50,9 @@ public class RedStoneGuiLaunch {
 
 		JButton posButton = new JButton("持仓");
 		topPanel.add(posButton);
+		
+		JButton eventButton = new JButton("事件");
+		topPanel.add(eventButton);
 
 		JPanel centerPanel = new JPanel();
 		mainWindow.getContentPane().add(centerPanel, BorderLayout.CENTER);
