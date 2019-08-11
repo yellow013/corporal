@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -13,6 +16,8 @@ public class RedStoneGuiLaunch {
 
 	private JFrame mainWindow;
 	private JTable dataTable;
+	private Object[][] dataMod;
+	
 
 	/**
 	 * Launch the application.
@@ -23,6 +28,7 @@ public class RedStoneGuiLaunch {
 
 	/**
 	 * Create the application.
+	 * @wbp.parser.entryPoint
 	 */
 	public RedStoneGuiLaunch() {
 		initialize();
@@ -34,13 +40,15 @@ public class RedStoneGuiLaunch {
 	private void initialize() {
 		mainWindow = new JFrame();
 		mainWindow.setBounds(100, 100, 450, 300);
+		mainWindow.setSize(500, 400);
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainWindow.getContentPane().setLayout(new BorderLayout(0, 0));
+		Container contentPane = mainWindow.getContentPane();
+		
+		
 
 		JPanel topPanel = new JPanel();
 		FlowLayout topPanelFlowLayout = (FlowLayout) topPanel.getLayout();
 		topPanelFlowLayout.setAlignment(FlowLayout.LEFT);
-		mainWindow.getContentPane().add(topPanel, BorderLayout.NORTH);
 
 		JButton strategyButton = new JButton("策略");
 		topPanel.add(strategyButton);
@@ -50,15 +58,30 @@ public class RedStoneGuiLaunch {
 
 		JButton posButton = new JButton("持仓");
 		topPanel.add(posButton);
-		
+
 		JButton eventButton = new JButton("事件");
 		topPanel.add(eventButton);
 
 		JPanel centerPanel = new JPanel();
-		mainWindow.getContentPane().add(centerPanel, BorderLayout.CENTER);
 
-		dataTable = new JTable();
-		centerPanel.add(dataTable);
+		dataMod = new Object[][] {
+			{"0000001", "1", "rb1910", "多", "2900", "1200"},
+			{"0000002", "2", "ni1910", "多", "36000", "400"},
+			{"0000003", "3", "rb1910", "多", "3000", "-800"}
+		};
+
+		String[] columnNames = new String[] { "订单号", "OrderRef", "合约", "方向", "价格", "盈亏" };
+
+		dataTable = new JTable(dataMod, columnNames);
+		dataTable.setSize(480, 380);
+		centerPanel.add(dataTable.getTableHeader(), BorderLayout.NORTH);
+		centerPanel.add(dataTable, BorderLayout.CENTER);
+		
+		
+		contentPane.setLayout(new BorderLayout());
+		contentPane.setSize(500, 400);
+		contentPane.add(topPanel, BorderLayout.NORTH);
+		contentPane.add(centerPanel, BorderLayout.CENTER);
 	}
 
 }
